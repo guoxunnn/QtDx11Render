@@ -154,7 +154,7 @@ public:
         std::vector<framework::XImage> vec;
         vec.push_back(img);
         return CreateTexutre(vec, gen_mipmap);
-    };
+    }
     virtual std::shared_ptr<RenderTextureBase> CreateTexutre(framework::XVector<framework::XImage> img_vec, bool gen_mipmap = true) const {
         std::vector<framework::XImage> img_v;
         for (int i = 0; i < img_vec.size(); i++) {
@@ -164,11 +164,11 @@ public:
     }
     virtual std::shared_ptr<RenderTextureBase> CreateTexutre(std::vector<framework::XImage> img_vec, bool gen_mipmap = true) const {
         return nullptr;
-    };
+    }
     virtual void CreateGpuIndexBuffer(const uint32_t* pIndices, size_t size,
                                       std::shared_ptr<RenderBufferBase>& pBuf) const = 0;
-    virtual void CreateEmptyVertexBuffer(size_t size, std::shared_ptr<RenderBufferBase>& buf) {};
-    virtual void CreateEmptyIndexBuffer(size_t size, std::shared_ptr<RenderBufferBase>& buf) {};
+    virtual void CreateEmptyVertexBuffer(size_t size, std::shared_ptr<RenderBufferBase>& buf) {}
+    virtual void CreateEmptyIndexBuffer(size_t size, std::shared_ptr<RenderBufferBase>& buf) {}
     // 不创建空间，覆盖原来的空间而已
     virtual void ModifyGpuBuffer(const void* pIndices, size_t size, std::shared_ptr<RenderBufferBase>& pBuf,
                                  size_t offset = 0) const = 0;
@@ -179,7 +179,7 @@ public:
                                                                      const std::string& var_name) const {
         return nullptr;
     }
-    void RenderModelBuffer(ModelBuffer* model_buf, DrawType type) const;
+    //void RenderModelBuffer(ModelBuffer* model_buf, DrawType type) const;
     virtual std::shared_ptr<RenderTargetTextureBase> CreateTargetTextureBase() const {
         return nullptr;
     }
@@ -219,10 +219,10 @@ public:
         return cur_program_;
     }
     virtual void CopyResource(std::shared_ptr<RenderTargetTextureBase>& dest,
-                              std::shared_ptr<RenderTargetTextureBase>& src) const {};
-    virtual void CreatDetectSuspendBlendState() const {};
+                              std::shared_ptr<RenderTargetTextureBase>& src) const {}
+    virtual void CreatDetectSuspendBlendState() const {}
     virtual void UpdataViewport() const = 0;
-    virtual void FrameStartOrEnd(bool is_start = true) {};
+    virtual void FrameStartOrEnd(bool is_start = true) {}
     virtual void ClearUav(std::shared_ptr<RenderUavBase> uav, int32_t value) const = 0;
     virtual std::shared_ptr<RenderUavBase> CreateUav(int count, int single_element_size, int slot, bool atomic_flag = false) const = 0;
     virtual void DestoryUav(std::shared_ptr<RenderUavBase> uav) = 0;
@@ -256,7 +256,7 @@ protected:
         return false;
     }
     virtual void RenderBlockBuffer(BlockBuffer* buf, DrawType type) const {}
-    virtual void RenderBlockBuffer(VertexBlockBuffer* buf, DrawType type) const {};
+    virtual void RenderBlockBuffer(VertexBlockBuffer* buf, DrawType type) const {}
     virtual void RenderBlockBuffer(RenderBufferBase* idx_buf, RenderBufferBase* v_buf, DrawType type,
         unsigned int index_size, unsigned index_offset = 0) const {}
 

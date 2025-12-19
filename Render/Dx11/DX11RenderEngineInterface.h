@@ -1,9 +1,16 @@
 #ifndef DX11RenderEngineInterface_H
 #define DX11RenderEngineInterface_H
 
-#include "../../manager/RenderEngineInterface.h"
-#include "../RabbitDX11.h"
-#include "../texture/Texture2D.h"
+#include "../Base/RenderEngineInterface.h"
+#include "texture/Texture2D.h"
+#include <DirectXMath.h>
+#include "utils/D3DUtil.h"
+#include "utils/DX11CommonFunc.h"
+#include "utils/DX11Vertex.h"
+#include "utils/RenderStates.h"
+#include "d3d11.h"
+#include "d3dcompiler.h"
+#include "geometry/FVector2D.h"
 
 namespace render {
 class DX11DataBuffer : RenderBufferBase {
@@ -175,5 +182,5 @@ private:
     std::shared_ptr<MyStatus> status_ptr_ = nullptr;
 };
 
-};  // namespace render
+}  // namespace render
 #endif

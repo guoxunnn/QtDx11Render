@@ -1,6 +1,6 @@
 QT += quick
 
-CONFIG += c++11
+CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -12,15 +12,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-
+include(3rdparty/3rdparty.pri)
 SOURCES += \
         Render/Base/RenderEngineInterface.cpp \
         Render/DX11/DX11RenderEngineInterface.cpp \
-        Render/RenderData/ComRenderResource.cpp \
+        Render/Dx11/texture/Texture2D.cpp \
+        Render/Dx11/utils/D3DUtil.cpp \
+        Render/Dx11/utils/DX11CommonFunc.cpp \
+        Render/Dx11/utils/DX11Vertex.cpp \
+        Render/Dx11/utils/RenderStates.cpp \
         Render/RenderData/RenderData.cpp \
-        Render/Threadpart/framework/xbuffer.cpp \
-        Render/Threadpart/framework/ximage.cpp \
-        Render/Threadpart/framework/xvector.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
@@ -39,9 +40,14 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     Render/Base/RenderEngineInterface.h \
     Render/DX11/DX11RenderEngineInterface.h \
+    Render/Dx11/texture/Texture2D.h \
+    Render/Dx11/utils/D3DUtil.h \
+    Render/Dx11/utils/DX11ColorUtil.h \
+    Render/Dx11/utils/DX11CommonFunc.h \
+    Render/Dx11/utils/DX11Vertex.h \
+    Render/Dx11/utils/RenderStates.h \
     Render/Interface/render_data.h \
-    Render/RenderData/ComRenderResource.h \
-    Render/RenderData/RenderData.h \
-    Render/Threadpart/framework/xbuffer.h \
-    Render/Threadpart/framework/ximage.h \
-    Render/Threadpart/framework/xvector.h
+    Render/RenderData/RenderData.h
+
+DISTFILES += \
+    Render/Threadpart/geometry/CMakeLists.txt

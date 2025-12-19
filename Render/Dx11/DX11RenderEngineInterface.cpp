@@ -1,8 +1,8 @@
 #include "DX11RenderEngineInterface.h"
 
-#include "../texture/Texture2D.h"
-#include "../../utils/ConfigHelper.h"
+#include "texture/Texture2D.h"
 #include <map>
+#include "base/log.h"
 
 namespace render {
 void DX11RenderTargetTextureBase::refreshTargetTexture(int w, int h) {
@@ -584,12 +584,12 @@ std::shared_ptr<DX11RenderProgramBase> DX11RenderEngineInterface::createRenderSh
     // vs
     {
         result = D3DUtil::CreateShaderFromFile(vs_cso, vs_path.c_str(), "VS", "vs_5_0", blob.GetAddressOf(), defines.data(), defines.size());
-        CTCHECK(result == S_OK) << "CreateShaderFromFile failed. result:" << result;
+        ERROR_CHECK(result == S_OK) << "CreateShaderFromFile failed. result:" << result;
         result = device->CreateVertexShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr,
                                             shader_ptr->vs_.GetAddressOf());
-        CTCHECK(result == S_OK) << "CreateVertexShader failed. result:" << result;
+        ERROR_CHECK(result == S_OK) << "CreateVertexShader failed. result:" << result;
 
-        CTCHECK(result == S_OK) << "CreateInputLayout failed. result:" << result;
+        ERROR_CHECK(result == S_OK) << "CreateInputLayout failed. result:" << result;
     } 
 
     // input
@@ -613,21 +613,21 @@ std::shared_ptr<DX11RenderProgramBase> DX11RenderEngineInterface::createRenderSh
     {
         result = D3DUtil::CreateShaderFromFile(ps_cso, ps_path.c_str(), "PS", "ps_5_0", blob.ReleaseAndGetAddressOf(),
                                                defines.data(), defines.size()); 
-        CTCHECK(result == S_OK) << "CreateShaderFromFile2 failed. result:" << result;
+        ERROR_CHECK(result == S_OK) << "CreateShaderFromFile2 failed. result:" << result;
 
         result = device->CreatePixelShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr,
                                             shader_ptr->ps_.GetAddressOf());
-        CTCHECK(result == S_OK) << "CreatePixelShader failed. result:" << result;
+        ERROR_CHECK(result == S_OK) << "CreatePixelShader failed. result:" << result;
     }   
 
     // gs
     if (info.gs_flag_) {
         result = D3DUtil::CreateShaderFromFile(gs_cso, gs_path.c_str(), "GS", "gs_5_0", blob.ReleaseAndGetAddressOf(),
                                                defines.data(), defines.size());
-        CTCHECK(result == S_OK) << "CreateShaderFromFile failed. result:" << result;
+        ERROR_CHECK(result == S_OK) << "CreateShaderFromFile failed. result:" << result;
         result = device->CreateGeometryShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr,
                                               shader_ptr->gs_.GetAddressOf());
-        CTCHECK(result == S_OK) << "CreateGeometryShader failed. result:" << result;
+        ERROR_CHECK(result == S_OK) << "CreateGeometryShader failed. result:" << result;
     }
 
     return shader_ptr;
@@ -637,8 +637,7 @@ std::shared_ptr<RenderProgramBase> DX11RenderEngineInterface::CreateShaderProgra
     const RenderProgramBase::ShaderInfo& info) const {
 
     std::string dir = "resources/shader/DX11Shader2/" + info.pragma_name_ + "/";
-    std::string cso_dir = ConfigHelper::GetInstance().GetRenderImp()->GetRenderConfig()->GetComplierShaderOverPath();
-    cso_dir = cso_dir + "/_" + info.pragma_name_ + "_";
+    std::string cso_dir = "";
     auto w_dir = D3DUtil::GetWC(dir.c_str(), dir.size());
     std::wstring cso_w_dir;
     if(cso_dir.size())
@@ -735,12 +734,12 @@ void DX11RenderEngineInterface::RenderBlockBuffer(BlockBuffer* buf, DrawType typ
         return;
     }
     UINT offset = 0;
-    UINT stride = sizeof(FVector3D);
+    UINT stride = sizeof(geometry::FVector3D);
     if (cur_program_) {
         if (cur_program_->shader_info_.input_type_ == RenderProgramBase::ShaderInfo::VertexPosNormalTex) {
-            stride = sizeof(FVector3D) + sizeof(FVector3D) + sizeof(FVector2D);
+            stride = sizeof(geometry::FVector3D) + sizeof(geometry::FVector3D) + sizeof(geometry::FVector2D);
         } else if (cur_program_->shader_info_.input_type_ == RenderProgramBase::ShaderInfo::VertexPosNormal) {
-            stride = sizeof(FVector3D) + sizeof(FVector3D);
+            stride = sizeof(geometry::FVector3D) + sizeof(geometry::FVector3D);
         }
     }
     DX11DataBuffer* v_buf = (DX11DataBuffer*)buf->vertex_handle_.get();
@@ -762,13 +761,13 @@ void DX11RenderEngineInterface::RenderBlockBuffer(VertexBlockBuffer* buf, DrawTy
         return;
     }
     UINT offset = 0;
-    UINT stride = sizeof(FVector3D);
+    UINT stride = sizeof(geometry::FVector3D);
     auto input_type = this->cur_program_->shader_info_.input_type_;
     if (input_type == RenderProgramBase::ShaderInfo::VertexPosColor) {
-        stride = sizeof(FVector3D) + sizeof(FVector3D);
+        stride = sizeof(geometry::FVector3D) + sizeof(geometry::FVector3D);
     }
     else if (input_type == RenderProgramBase::ShaderInfo::VertexPosNormalTex) {
-        stride = sizeof(FVector3D) + sizeof(FVector3D) + sizeof(FVector2D);
+        stride = sizeof(geometry::FVector3D) + sizeof(geometry::FVector3D) + sizeof(geometry::FVector2D);
     }
     DX11DataBuffer* v_buf = (DX11DataBuffer*)buf->vertex_handle_.get();
     ID3D11DeviceContext* context = (ID3D11DeviceContext*)render_interface_.drv_context;
@@ -783,12 +782,12 @@ void DX11RenderEngineInterface::RenderBlockBuffer(RenderBufferBase* i, RenderBuf
         return;
     }
     UINT offset = 0;
-    UINT stride = sizeof(FVector3D);
+    UINT stride = sizeof(geometry::FVector3D);
     if (cur_program_) {
         if (cur_program_->shader_info_.input_type_ == RenderProgramBase::ShaderInfo::VertexPosNormalTex) {
-            stride = sizeof(FVector3D) + sizeof(FVector3D) + sizeof(FVector2D);
+            stride = sizeof(geometry::FVector3D) + sizeof(geometry::FVector3D) + sizeof(geometry::FVector2D);
         } else if (cur_program_->shader_info_.input_type_ == RenderProgramBase::ShaderInfo::VertexPosNormal) {
-            stride = sizeof(FVector3D) + sizeof(FVector3D);
+            stride = sizeof(geometry::FVector3D) + sizeof(geometry::FVector3D);
         }
     }
     DX11DataBuffer* v_buf = (DX11DataBuffer*)v;

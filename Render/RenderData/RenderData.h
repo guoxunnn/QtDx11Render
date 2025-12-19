@@ -6,8 +6,10 @@
 #include <unordered_set>
 #include <vector>
 #include "../Interface/render_data.h"
-#include "Render/Threadpart/framework/ximage.h"
-#include "Render/Threadpart/framework/xvector.h"
+#include "framework/ximage.h"
+#include "framework/xvector.h"
+#include "geometry/FVector3D.h"
+#include "geometry/FVector2D.h"
 
 // 支撑和模型面片相距
 #define SupDistanceModelNum 3
@@ -15,6 +17,50 @@ namespace base {
 class ThreadPool;
 }
 namespace render {
+    class RenderColor {
+    public:
+        RenderColor();
+        RenderColor(float r, float g, float b, float a = 1.f);
+
+        static RenderColor FromColor32(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
+        static RenderColor FromColor32(uint32_t rgba);
+
+        float Red() const { return red_; }
+        float Green() const { return green_; }
+        float Blue() const { return blue_; }
+        float Alpha() const { return alpha_; }
+        const float* Rgba() const { return rgba_; }
+
+        void SetRed(float r) { red_ = r; }
+        void SetGreen(float g) { green_ = g; }
+        void SetBlue(float b) { blue_ = b; }
+        void SetAlpha(float a) { alpha_ = a; }
+
+        void SetRgb(const float rgb[3]) { SetRgb(rgb[0], rgb[1], rgb[2]); }
+        void SetRgb(float r, float g, float b) {
+            red_ = r;
+            green_ = g;
+            blue_ = b;
+        }
+
+        void SetRgba(const float rgba[4]) { SetRgba(rgba[0], rgba[1], rgba[2], rgba[3]); }
+        void SetRgba(float r, float g, float b, float a) {
+            red_ = r;
+            green_ = g;
+            blue_ = b;
+            alpha_ = a;
+        }
+
+        bool operator==(const RenderColor& other) const;
+        bool operator!=(const RenderColor& other) const;
+
+    private:
+        union {
+            float rgba_[4];
+            struct { float red_, green_, blue_, alpha_; };
+        };
+    };
+
     class RenderMouseAndKeyEventControl;
     // 渲染数据基类
     class RenderBufferBase {
@@ -84,5 +130,11 @@ namespace render {
         // 顶点缓存句柄
         std::shared_ptr<RenderBufferBase> vertex_handle_ = nullptr;
         uint32_t vertex_size = 0;
+    };
+
+    struct VertexPosNorlTex {
+        geometry::FVector3D pos;  // 顶点坐标
+        geometry::FVector3D normal;
+        geometry::FVector2D tex;  // 纹理坐标
     };
 }// namespace render

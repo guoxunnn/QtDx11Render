@@ -1,11 +1,12 @@
 #include "RenderEngineInterface.h"
+#include "base/log.h"
 
 namespace render {
-void RenderEngineInterface::RenderModelBuffer(ModelBuffer* model_buf, DrawType type) const {
-    for (auto& buf : model_buf->blockBuffers) {
-        RenderBlockBuffer(buf.get(), type);
-    }
-}
+//void RenderEngineInterface::RenderModelBuffer(ModelBuffer* model_buf, DrawType type) const {
+//    for (auto& buf : model_buf->blockBuffers) {
+//        RenderBlockBuffer(buf.get(), type);
+//    }
+//}
 
 std::shared_ptr<RenderProgramBase> RenderEngineInterface::CreateShaderProgramCB(const RenderProgramBase::ShaderInfo& info) const {
     auto res = CreateShaderProgram(info);
@@ -47,8 +48,8 @@ if (ptr) {\
 }
 
 RenderEngineInterface::Viewport::Viewport(RenderContext* context) {
-    int win_height = context->client_info_->windowInfo.GetWindowHeight();
-    window_height = win_height;
+    //int win_height = context->client_info_->windowInfo.GetWindowHeight();
+    //window_height = win_height;
 }
 
 void RenderEngineInterface::SetRenderStatusCB(const RenderStatusInfo& info) const {
