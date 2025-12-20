@@ -13,15 +13,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 include(3rdparty/3rdparty.pri)
+include(Render/Render.pri)
+
 SOURCES += \
-        Render/Base/RenderEngineInterface.cpp \
-        Render/DX11/DX11RenderEngineInterface.cpp \
-        Render/Dx11/texture/Texture2D.cpp \
-        Render/Dx11/utils/D3DUtil.cpp \
-        Render/Dx11/utils/DX11CommonFunc.cpp \
-        Render/Dx11/utils/DX11Vertex.cpp \
-        Render/Dx11/utils/RenderStates.cpp \
-        Render/RenderData/RenderData.cpp \
         main.cpp
 
 RESOURCES += qml.qrc

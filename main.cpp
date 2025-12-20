@@ -1,9 +1,11 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQuickWindow>
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QQuickWindow::setSceneGraphBackend(QSGRendererInterface::Direct3D11Rhi);
 
     QGuiApplication app(argc, argv);
 
