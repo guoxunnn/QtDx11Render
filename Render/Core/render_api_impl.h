@@ -11,6 +11,15 @@ class RenderManager;
 class RenderApiImpl : public RenderApi {
 public:
     RenderApiImpl();
+    void OnMousePressEvent(const MouseEvent& event);
+    void OnMouseMoveEvent(const MouseEvent& event);
+    void OnMouseReleaseEvent(const MouseEvent& event);
+    void onMouseClickEvent(const MouseEvent& event);
+    void onMouseDoubleClickEvent(const MouseEvent& event);
+    void OnHoverLeaveEvent(const MouseEvent& event);
+    void OnHoverMoveEvent(const MouseEvent& event);
+    void OnUpdataMousePos(const MouseEvent& event);
+    RenderConfig* GetRenderConfig() const;
     void Render(int win_id) override;
 
 private:

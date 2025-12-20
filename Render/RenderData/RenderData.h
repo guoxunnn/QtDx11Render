@@ -12,9 +12,7 @@
 
 // 支撑和模型面片相距
 #define SupDistanceModelNum 3
-namespace base {
-class ThreadPool;
-}
+
 namespace render {
     class RenderColor {
     public:

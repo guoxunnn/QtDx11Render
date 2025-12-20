@@ -3,6 +3,7 @@ include(DX11/DX11.pri)
 HEADERS += \
     $$PWD/Base/RenderEngineInterface.h \
     $$PWD/Core/Manager/RenderManager.h \
+    $$PWD/Core/Manager/RenderMouseAndKeyEventControl.h \
     $$PWD/Core/render_api_impl.h \
     $$PWD/Impl/render_api.h \
     $$PWD/Impl/render_color_config.h \
@@ -15,6 +16,7 @@ HEADERS += \
 SOURCES += \
     $$PWD/Base/RenderEngineInterface.cpp \
     $$PWD/Core/Manager/RenderManager.cpp \
+    $$PWD/Core/Manager/RenderMouseAndKeyEventControl.cpp \
     $$PWD/Core/render_api_impl.cpp \
     $$PWD/Impl/render_api.cpp \
     $$PWD/Impl/render_color_config.cpp \

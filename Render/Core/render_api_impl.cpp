@@ -1,13 +1,53 @@
 #include "render_api_impl.h"
 #include "Manager/RenderManager.h"
+#include "Manager/RenderMouseAndKeyEventControl.h"
 
 namespace render {
 RenderApiImpl::RenderApiImpl() {
     render_config_ = std::make_shared<RenderConfig>();
 }
 
-void RenderApiImpl::Render(int win_id) {
+void RenderApiImpl::OnMousePressEvent(const MouseEvent& event) {
+    getRenderManager(event.win_id_)->GetMouseControl()->OnMousePressEvent(event);
+}
 
+void RenderApiImpl::OnMouseMoveEvent(const MouseEvent& event) {
+    getRenderManager(event.win_id_)->GetMouseControl()->OnMouseMoveEvent(event);
+
+}
+
+void RenderApiImpl::OnMouseReleaseEvent(const MouseEvent& event){
+    getRenderManager(event.win_id_)->GetMouseControl()->OnMouseReleaseEvent(event);
+
+}
+
+void RenderApiImpl::onMouseClickEvent(const MouseEvent& event){
+    getRenderManager(event.win_id_)->GetMouseControl()->onMouseClickEvent(event);
+
+}
+
+void RenderApiImpl::onMouseDoubleClickEvent(const MouseEvent& event){
+    getRenderManager(event.win_id_)->GetMouseControl()->onMouseDoubleClickEvent(event);
+}
+
+void RenderApiImpl::OnHoverLeaveEvent(const MouseEvent& event){
+    getRenderManager(event.win_id_)->GetMouseControl()->OnHoverLeaveEvent(event);
+}
+
+void RenderApiImpl::OnHoverMoveEvent(const MouseEvent& event){
+    getRenderManager(event.win_id_)->GetMouseControl()->OnHoverMoveEvent(event);
+}
+
+void RenderApiImpl::OnUpdataMousePos(const MouseEvent& event){
+    getRenderManager(event.win_id_)->GetMouseControl()->OnUpdataMousePos(event);
+}
+
+RenderConfig* RenderApiImpl::GetRenderConfig() const {
+    return this->render_config_.get();
+}
+
+void RenderApiImpl::Render(int win_id) {
+    getRenderManager(win_id)->Render();
 }
 
 RenderManager* RenderApiImpl::getRenderManager(int win_id, bool not_exist_is_create_flag) {
@@ -21,5 +61,4 @@ RenderManager* RenderApiImpl::getRenderManager(int win_id, bool not_exist_is_cre
         render_manager_map_[win_id] = render_mgr;
     }
 }
-
 }
