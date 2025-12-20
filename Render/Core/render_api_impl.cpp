@@ -1,10 +1,15 @@
 #include "render_api_impl.h"
 #include "Manager/RenderManager.h"
 #include "Manager/RenderMouseAndKeyEventControl.h"
+#include "../Core/render_api_impl.h"
 
 namespace render {
 RenderApiImpl::RenderApiImpl() {
     render_config_ = std::make_shared<RenderConfig>();
+}
+
+std::shared_ptr<RenderApi> RenderApi::CreateRenderImpl() {
+    return std::make_shared<RenderApiImpl>();
 }
 
 void RenderApiImpl::OnMousePressEvent(const MouseEvent& event) {
@@ -13,17 +18,14 @@ void RenderApiImpl::OnMousePressEvent(const MouseEvent& event) {
 
 void RenderApiImpl::OnMouseMoveEvent(const MouseEvent& event) {
     getRenderManager(event.win_id_)->GetMouseControl()->OnMouseMoveEvent(event);
-
 }
 
 void RenderApiImpl::OnMouseReleaseEvent(const MouseEvent& event){
     getRenderManager(event.win_id_)->GetMouseControl()->OnMouseReleaseEvent(event);
-
 }
 
 void RenderApiImpl::onMouseClickEvent(const MouseEvent& event){
     getRenderManager(event.win_id_)->GetMouseControl()->onMouseClickEvent(event);
-
 }
 
 void RenderApiImpl::onMouseDoubleClickEvent(const MouseEvent& event){

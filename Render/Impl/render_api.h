@@ -2,11 +2,13 @@
 #define RENDER_API_H
 #include "render_config.h"
 #include "render_data.h"
+#include <memory>
 
 namespace render {
 class RenderApi {
 public:
     RenderApi();
+    static std::shared_ptr<RenderApi> CreateRenderImpl();
     virtual void OnMousePressEvent(const MouseEvent& event) = 0;
     virtual void OnMouseMoveEvent(const MouseEvent& event) = 0;
     virtual void OnMouseReleaseEvent(const MouseEvent& event) = 0;

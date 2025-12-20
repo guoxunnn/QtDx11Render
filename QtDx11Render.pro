@@ -16,7 +16,8 @@ include(3rdparty/3rdparty.pri)
 include(Render/Render.pri)
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+        src/render/render_manager.cpp
 
 RESOURCES += qml.qrc
 
@@ -33,3 +34,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     Render/Threadpart/geometry/CMakeLists.txt
+
+HEADERS += \
+    src/render/render_manager.h

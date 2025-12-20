@@ -8,7 +8,7 @@ RenderManager::RenderManager(RenderApiImpl* impl) {
 }
 
 void RenderManager::Render() {
-
+    render_context_base_->UpdateCamera(mouse_control_.GetCamera());
 }
 }
 
