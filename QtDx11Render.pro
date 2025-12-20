@@ -17,7 +17,10 @@ include(Render/Render.pri)
 
 SOURCES += \
         main.cpp \
-        src/render/render_manager.cpp
+        src/render/render_area_item.cpp \
+        src/render/render_manager.cpp \
+        src/render/render_window_view.cpp \
+        src/soft_ware_control.cpp
 
 RESOURCES += qml.qrc
 
@@ -36,4 +39,7 @@ DISTFILES += \
     Render/Threadpart/geometry/CMakeLists.txt
 
 HEADERS += \
-    src/render/render_manager.h
+    src/render/render_area_item.h \
+    src/render/render_manager.h \
+    src/render/render_window_view.h \
+    src/soft_ware_control.h

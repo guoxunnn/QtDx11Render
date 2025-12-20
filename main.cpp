@@ -1,12 +1,13 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickWindow>
+#include "src/soft_ware_control.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QQuickWindow::setSceneGraphBackend(QSGRendererInterface::Direct3D11Rhi);
-
+    SoftwareControlSingleton::Instance().Init();
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
