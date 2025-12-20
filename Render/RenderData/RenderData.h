@@ -5,7 +5,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include "../Interface/render_data.h"
 #include "framework/ximage.h"
 #include "framework/xvector.h"
 #include "geometry/FVector3D.h"

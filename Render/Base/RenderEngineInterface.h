@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "../RenderData/RenderData.h"
+#include "../Impl/render_data.h"
 
 namespace render {
 class RenderConstBufferBase {

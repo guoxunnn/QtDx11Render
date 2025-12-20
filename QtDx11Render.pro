@@ -31,17 +31,5 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += \
-    Render/Base/RenderEngineInterface.h \
-    Render/DX11/DX11RenderEngineInterface.h \
-    Render/Dx11/texture/Texture2D.h \
-    Render/Dx11/utils/D3DUtil.h \
-    Render/Dx11/utils/DX11ColorUtil.h \
-    Render/Dx11/utils/DX11CommonFunc.h \
-    Render/Dx11/utils/DX11Vertex.h \
-    Render/Dx11/utils/RenderStates.h \
-    Render/Interface/render_data.h \
-    Render/RenderData/RenderData.h
-
 DISTFILES += \
     Render/Threadpart/geometry/CMakeLists.txt
