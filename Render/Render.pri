@@ -2,16 +2,24 @@ include(DX11/DX11.pri)
 
 HEADERS += \
     $$PWD/Base/RenderEngineInterface.h \
+    $$PWD/Core/Manager/RenderManager.h \
     $$PWD/Core/render_api_impl.h \
     $$PWD/Impl/render_api.h \
     $$PWD/Impl/render_color_config.h \
     $$PWD/Impl/render_config.h \
-    $$PWD/Impl/render_data.h
+    $$PWD/Impl/render_data.h \
+    $$PWD/RenderData/RCamera.h \
+    $$PWD/RenderData/RenderContext.h \
+    $$PWD/RenderData/RenderData.h
 
 SOURCES += \
     $$PWD/Base/RenderEngineInterface.cpp \
+    $$PWD/Core/Manager/RenderManager.cpp \
     $$PWD/Core/render_api_impl.cpp \
     $$PWD/Impl/render_api.cpp \
     $$PWD/Impl/render_color_config.cpp \
-    $$PWD/Impl/render_config.cpp
+    $$PWD/Impl/render_config.cpp \
+    $$PWD/RenderData/RCamera.cpp \
+    $$PWD/RenderData/RenderContext.cpp \
+    $$PWD/RenderData/RenderData.cpp
 
