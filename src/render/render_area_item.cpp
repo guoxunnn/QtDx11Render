@@ -17,11 +17,44 @@ RenderItemBase::RenderItemBase() {
             }, Qt::DirectConnection);
             connect(window, &QQuickWindow::destroyed, this, [=]() {
             });
-            connect(window, &QQuickWindow::beforeSynchronizing, this, [](){
-
+            connect(window, &QQuickWindow::beforeSynchronizing, this, [this](){
+                if (init_flag_) {
+                    auto render_cb = [this]() {
+                        onXYChange();
+                        // this->set_devicePixelRatio(this->window()->devicePixelRatio());
+                        // 发出渲染请求
+                        emit renderRequest();
+                    };
+                    if (before_ui_render_flag_) {
+                        connect(this->window(), &QQuickWindow::beforeRenderPassRecording, this, [render_cb](){
+                            render_cb();
+                        },Qt::DirectConnection);
+                    }
+                    else {
+                        connect(this->window(), &QQuickWindow::afterRenderPassRecording, this, [render_cb](){
+                            render_cb();
+                        },Qt::DirectConnection);
+                    }
+                    init_flag_ = false;
+                }
             }, Qt::DirectConnection);
         }
     });
+}
+
+void RenderItemBase::onXYChange() {
+    int x = 0;
+    int y = 0;
+    QQuickItem* item = this;
+    while (item != nullptr) {
+        x += item->x();
+        y += item->y();
+        item = item->parentItem();
+    }
+//    if (x != renderX || y != renderY) {
+//        setrenderX(x);
+//        setrenderY(y);
+//    }
 }
 
 RenderAreaItem::RenderAreaItem() {

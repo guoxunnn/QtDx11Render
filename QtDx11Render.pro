@@ -39,6 +39,7 @@ DISTFILES += \
     Render/Threadpart/geometry/CMakeLists.txt
 
 HEADERS += \
+    src/client_macro.h \
     src/render/render_area_item.h \
     src/render/render_manager.h \
     src/render/render_window_view.h \
