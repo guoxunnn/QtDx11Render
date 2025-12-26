@@ -7,7 +7,6 @@
 class RenderItemBase : public QQuickItem {
     Q_OBJECT
 
-    REGISTER_Q_PROPERTY(int, z_depth, 0)
 public:
     RenderItemBase();
     int64_t ID() {

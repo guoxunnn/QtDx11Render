@@ -12,8 +12,6 @@ namespace render {
         int y_ = 0; 
         int width_ = 0;
         int height_ = 0;
-        int z_depth_ = 0;
-        char name[128] = {0};
     };
     class RenderInterface {
     public:

@@ -56,8 +56,8 @@ render::RenderInterface* RenderApiImpl::GetRenderEngine(int win_id) {
     return &getRenderManager(win_id)->GetRenderContext()->GetRenderEngine()->render_interface_;
 }
 
-render::RenderItemInfo* RenderApiImpl::CreateRenderInfo(int win_id, int base_id) {
-    return getRenderManager(win_id)->CreateRenderInfo(base_id);
+render::RenderItemInfo* RenderApiImpl::CreateRenderInfo(int win_id, int base_id, RenderTargetType type) {
+    return getRenderManager(win_id)->CreateRenderInfo(base_id, type);
 }
 
 RenderManager* RenderApiImpl::getRenderManager(int win_id, bool not_exist_is_create_flag) {
@@ -70,5 +70,6 @@ RenderManager* RenderApiImpl::getRenderManager(int win_id, bool not_exist_is_cre
         render_mgr = std::make_shared<RenderManager>(this);
         render_manager_map_[win_id] = render_mgr;
     }
+    return render_manager_map_[win_id].get();
 }
 }

@@ -1,6 +1,9 @@
 include(DX11/DX11.pri)
 
+INCLUDEPATH += $$PWD
+
 HEADERS += \
+    $$PWD/Base/RenderAreaBase.h \
     $$PWD/Base/RenderEngineInterface.h \
     $$PWD/Core/Manager/RenderManager.h \
     $$PWD/Core/Manager/RenderMouseAndKeyEventControl.h \
@@ -14,6 +17,7 @@ HEADERS += \
     $$PWD/RenderData/RenderData.h
 
 SOURCES += \
+    $$PWD/Base/RenderAreaBase.cpp \
     $$PWD/Base/RenderEngineInterface.cpp \
     $$PWD/Core/Manager/RenderManager.cpp \
     $$PWD/Core/Manager/RenderMouseAndKeyEventControl.cpp \

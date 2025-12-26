@@ -15,7 +15,7 @@ RenderItemBase::RenderItemBase() : id_(id_count.fetch_add(1)) {
         if (window) {
             cur_belong_win_ = window;
             auto render_manager = SoftwareControlSingleton::Instance().GetRenderManager();
-            render_info_ = render_manager->GetRenderApi()->CreateRenderInfo(window->winId(), id_, render::RenderTargetType::MainRenderArea);
+            render_info_ = render_manager->GetRenderApi()->CreateRenderInfo(window->winId(), id_);
             render_manager->InsertViewMap(window, this);
             connect(window, &QQuickWindow::sceneGraphInvalidated, this, [](){
 
@@ -59,7 +59,6 @@ void RenderItemBase::onXYChange() {
     render_info_->y_ = y * window()->devicePixelRatio();
     render_info_->width_ = width() * window()->devicePixelRatio();
     render_info_->height_ = height() * window()->devicePixelRatio();
-    render_info_->z_depth_ = getz_depth();
 }
 
 render::MouseEvent RenderItemBase::getRenderMouseEvent(QMouseEvent* event, bool is_release) {
