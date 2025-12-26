@@ -14,6 +14,8 @@ public:
     RenderMouseAndKeyEventControl* GetMouseControl() {
         return &mouse_control_;
     }
+    std::shared_ptr<RenderContext> GetRenderContext() { return render_context_base_; }
+
 protected:
     std::shared_ptr<RenderContext> render_context_base_ = nullptr;
     RenderMouseAndKeyEventControl mouse_control_;

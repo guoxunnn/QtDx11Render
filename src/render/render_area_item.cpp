@@ -21,7 +21,6 @@ RenderItemBase::RenderItemBase() {
                 if (init_flag_) {
                     auto render_cb = [this]() {
                         onXYChange();
-                        // this->set_devicePixelRatio(this->window()->devicePixelRatio());
                         // 发出渲染请求
                         emit renderRequest();
                     };

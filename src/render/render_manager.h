@@ -13,6 +13,10 @@ class RenderManager : public QObject {
 public:
     RenderManager();
     void InsertViewMap(QQuickWindow* win, RenderItemBase* renderItem);
+    render::RenderApi* GetRenderApi();
+
+public:
+    std::mutex render_mutex_;
 
 private:
     std::shared_ptr<render::RenderApi> render_api_ = nullptr;

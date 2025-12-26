@@ -21,6 +21,7 @@ public:
     void OnUpdataMousePos(const MouseEvent& event) override;
     RenderConfig* GetRenderConfig() const override;
     void Render(int win_id) override;
+    virtual render::RenderInterface* GetRenderEngine(int win_id);
 
 private:
     RenderManager* getRenderManager(int win_id, bool not_exist_is_create_flag = true);

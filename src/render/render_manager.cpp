@@ -14,3 +14,7 @@ void RenderManager::InsertViewMap(QQuickWindow* win, RenderItemBase* renderItem)
         window_view_map_[win] = viewItem;
     }
 }
+
+render::RenderApi* RenderManager::GetRenderApi() {
+    return this->render_api_.get();
+}

@@ -9,6 +9,7 @@ class RenderContext {
 public:
     RenderContext(RenderApiImpl* impl, std::shared_ptr<RenderEngineInterface> engine);
     void UpdateCamera(const RCamera& c);
+    RenderEngineInterface* GetRenderEngine() { return engine_.get(); }
 
 private:
     RenderApiImpl* impl_;
