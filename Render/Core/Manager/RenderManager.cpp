@@ -10,5 +10,13 @@ RenderManager::RenderManager(RenderApiImpl* impl) {
 void RenderManager::Render() {
     render_context_base_->UpdateCamera(mouse_control_.GetCamera());
 }
+
+render::RenderItemInfo* RenderManager::CreateRenderInfo(int id) {
+    std::unique_lock<std::mutex> auto_lock(mutex_);
+    if (render_info_map_.find(id) == render_info_map_.end()) {
+        render_info_map_[id] = std::make_shared<render::RenderItemInfo>();
+    }
+    return render_info_map_[id].get();
+}
 }
 

@@ -4,6 +4,15 @@
 class ID3D11Device;
 class ID3D11DeviceContext;
 namespace render {
+    enum RenderTargetType { MainRenderArea };
+    class RenderItemInfo {
+    public:
+        int id_ = 0;
+        int x_ = 0;
+        int y_ = 0; 
+        int width_ = 0;
+        int height_ = 0;
+    };
     class RenderInterface {
     public:
 #if defined(_WIN32) || defined(_WIN32_) || defined(WIN32) || defined(_WIN64_) || defined(WIN64) || \
@@ -52,9 +61,14 @@ namespace render {
         bool isAltPressed() const {
             return modifiers_ & AltModifier;
         }
-        Button buttons;
+        int buttons;
         uint32_t modifiers_;
         Point position;
+        Point start_pos_;
+        int viewport_w_ = 0;
+        int viewport_h_ = 0;
         int win_id_ = -1;
+        float device_pixel_ratio_ = 1.0f;
+        RenderTargetType render_target_type_ = RenderTargetType::MainRenderArea;
     };
 }

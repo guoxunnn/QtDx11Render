@@ -56,6 +56,10 @@ render::RenderInterface* RenderApiImpl::GetRenderEngine(int win_id) {
     return &getRenderManager(win_id)->GetRenderContext()->GetRenderEngine()->render_interface_;
 }
 
+render::RenderItemInfo* RenderApiImpl::CreateRenderInfo(int win_id, int base_id) {
+    return getRenderManager(win_id)->CreateRenderInfo(base_id);
+}
+
 RenderManager* RenderApiImpl::getRenderManager(int win_id, bool not_exist_is_create_flag) {
     std::unique_lock<std::mutex> auto_lock(mutex_);
     if (render_manager_map_.find(win_id) == render_manager_map_.end()) {

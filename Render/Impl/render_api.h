@@ -20,6 +20,8 @@ public:
     virtual void Render(int win_id) = 0;
     virtual render::RenderInterface* GetRenderEngine(int win_id) = 0;
     virtual RenderConfig* GetRenderConfig() const = 0;
+    //返回的指针归属权属于渲染模块管理
+    virtual render::RenderItemInfo* CreateRenderInfo(int win_id, int base_id) = 0;
 };
 }
 
