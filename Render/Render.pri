@@ -3,6 +3,7 @@ include(DX11/DX11.pri)
 INCLUDEPATH += $$PWD
 
 HEADERS += \
+    $$PWD/Base/MainAreaRender.h \
     $$PWD/Base/RenderAreaBase.h \
     $$PWD/Base/RenderEngineInterface.h \
     $$PWD/Core/Manager/RenderManager.h \
@@ -17,6 +18,7 @@ HEADERS += \
     $$PWD/RenderData/RenderData.h
 
 SOURCES += \
+    $$PWD/Base/MainAreaRender.cpp \
     $$PWD/Base/RenderAreaBase.cpp \
     $$PWD/Base/RenderEngineInterface.cpp \
     $$PWD/Core/Manager/RenderManager.cpp \

@@ -11,6 +11,7 @@ class RenderAreaBase {
 public:
     RenderAreaBase(RenderManager* manager);
     RenderItemInfo* GetRenderItemInfo() {return render_item_info_.get();}
+    virtual void Render() = 0;
 
 protected:
     std::shared_ptr<RenderItemInfo> render_item_info_ = nullptr;
