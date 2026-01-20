@@ -25,8 +25,8 @@ void RenderWindowView::AddRenderItem(RenderItemBase* item) {
 	if (!connect_flag_) {
 		connect_flag_ = true;
         connect(item, &RenderItemBase::renderRequest, this, &RenderWindowView::render, Qt::DirectConnection);
-        auto win = belong_window_;
         belong_window_ = item->window();
+        auto win = belong_window_;
         connect(win, &QQuickWindow::widthChanged, this, &RenderWindowView::sizeChanged);
         connect(win, &QQuickWindow::heightChanged, this, &RenderWindowView::sizeChanged);
 	}

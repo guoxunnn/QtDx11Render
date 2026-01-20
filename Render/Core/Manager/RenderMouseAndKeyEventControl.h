@@ -20,6 +20,8 @@ public:
     }
 private:
     RCamera cur_camera_;
+    // 鼠标的上一个位置
+    Point last_pos_;
 };
 }
 
