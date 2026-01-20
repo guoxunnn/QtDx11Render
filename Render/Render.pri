@@ -6,6 +6,7 @@ HEADERS += \
     $$PWD/Base/MainAreaRender.h \
     $$PWD/Base/RenderAreaBase.h \
     $$PWD/Base/RenderEngineInterface.h \
+    $$PWD/Core/Manager/ModelRenderManager.h \
     $$PWD/Core/Manager/RenderManager.h \
     $$PWD/Core/Manager/RenderMouseAndKeyEventControl.h \
     $$PWD/Core/render_api_impl.h \
@@ -15,12 +16,14 @@ HEADERS += \
     $$PWD/Impl/render_data.h \
     $$PWD/RenderData/RCamera.h \
     $$PWD/RenderData/RenderContext.h \
-    $$PWD/RenderData/RenderData.h
+    $$PWD/RenderData/RenderData.h \
+    $$PWD/RenderData/RenderModel.h
 
 SOURCES += \
     $$PWD/Base/MainAreaRender.cpp \
     $$PWD/Base/RenderAreaBase.cpp \
     $$PWD/Base/RenderEngineInterface.cpp \
+    $$PWD/Core/Manager/ModelRenderManager.cpp \
     $$PWD/Core/Manager/RenderManager.cpp \
     $$PWD/Core/Manager/RenderMouseAndKeyEventControl.cpp \
     $$PWD/Core/render_api_impl.cpp \
@@ -29,5 +32,6 @@ SOURCES += \
     $$PWD/Impl/render_config.cpp \
     $$PWD/RenderData/RCamera.cpp \
     $$PWD/RenderData/RenderContext.cpp \
-    $$PWD/RenderData/RenderData.cpp
+    $$PWD/RenderData/RenderData.cpp \
+    $$PWD/RenderData/RenderModel.cpp
 
