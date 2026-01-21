@@ -100,7 +100,7 @@ namespace render {
     };
 
     struct BlockBuffer {
-        BlockBuffer(int64_t k, const uint32_t* i) : indices(i), model_id(k) {
+        BlockBuffer(int64_t k, const uint32_t* i) : indices_(i), model_id_(k) {
         }
 
     public:
@@ -110,16 +110,16 @@ namespace render {
         std::shared_ptr<RenderBufferBase> tri_status_index_handle_ = nullptr;  // 索引缓存句柄
         bool is_exist_flag_ = true;                                            // 内部使用
         int64_t start_index_ = 0;
-        uint32_t vertex_size = 0;
-        uint32_t index_size = 0;
+        uint32_t vertex_size_ = 0;
+        uint32_t index_size_ = 0;
         // 选择面片会用到下面两个
-        uint32_t normal_index_size = 0;
-        uint32_t select_index_size = 0;
-        uint32_t hide_index_size = 0;
-        const float* vertexes;
-        const uint32_t* indices;
+        uint32_t normal_index_size_ = 0;
+        uint32_t select_index_size_ = 0;
+        uint32_t hide_index_size_ = 0;
+        const float* vertexes_;
+        const uint32_t* indices_;
         //  const uint32_t *mapKey;
-        int64_t model_id;
+        int64_t model_id_;
         unsigned int stride_ = sizeof(float) * 3;
     };
 

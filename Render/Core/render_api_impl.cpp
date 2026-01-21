@@ -2,10 +2,12 @@
 #include "Manager/RenderManager.h"
 #include "Manager/RenderMouseAndKeyEventControl.h"
 #include "../Core/render_api_impl.h"
+#include "Manager/ModelRenderManager.h"
 
 namespace render {
 RenderApiImpl::RenderApiImpl() {
     render_config_ = std::make_shared<RenderConfig>();
+    model_render_manager_ = std::make_shared<ModelRenderManager>();
 }
 
 std::shared_ptr<RenderApi> RenderApi::CreateRenderImpl() {

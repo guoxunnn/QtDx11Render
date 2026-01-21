@@ -750,8 +750,8 @@ void DX11RenderEngineInterface::RenderBlockBuffer(BlockBuffer* buf, DrawType typ
 
     if (buf->index_handle_) {
         context->IASetIndexBuffer(i_buf->buf, DXGI_FORMAT_R32_UINT, 0);
-        if (buf->index_size > 0) {
-            context->DrawIndexed(buf->index_size, 0, 0);
+        if (buf->index_size_ > 0) {
+            context->DrawIndexed(buf->index_size_, 0, 0);
         }
     }
 }

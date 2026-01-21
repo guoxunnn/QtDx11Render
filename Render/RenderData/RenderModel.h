@@ -9,18 +9,15 @@
 #include <unordered_map>
 #include <string>
 #include <memory>
+namespace render {
 
 class VertexElement {
 public:
-    std::vector<int> indices;
-    std::vector<geometry::FVector3D> vertices;
+    void SetModifyFlagFalse() {
+        this->is_modify_flag_ = false;
+    }
+    bool IsModify() const {return is_modify_flag_;}
 
-private:
-    std::unordered_map<std::string, int> m_vertexHash;
-    int m_insertIndexArray[3] = {0};
-    int m_insertIndex = 0;
-
-public:
     void CalculateModelSize(geometry::FVector3D &minPos, geometry::FVector3D &maxPos) {
         float inf = 1e9;
         float minx = inf, miny = inf, minz = inf, maxx = -inf, maxy = -inf, maxz = -inf;
@@ -72,9 +69,31 @@ public:
     void offset(geometry::FVector3D offset) {
         for (int i = 0; i < vertices.size(); ++i) vertices[i] += offset;
     }
+
+public:
+    std::vector<int> indices;
+    std::vector<geometry::FVector3D> vertices;
+
+private:
+    std::unordered_map<std::string, int> m_vertexHash;
+    int m_insertIndexArray[3] = {0};
+    int m_insertIndex = 0;
+    bool is_modify_flag_ = true;
+
+
 };
 
 class RenderModel {
+public:
+    RenderModel();
+    void ProceseModelAfterLoad();
+    void Triangle(geometry::FVector3D &v1, geometry::FVector3D &v2, geometry::FVector3D &v3);
+
+    void GatherMatrix4x4(geometry::DMatrix4x4 &mat);
+    void ApplyMat(geometry::FMatrix4x4& mat);
+    void PlaceModelCenterToCenter(bool keepPosition = false);
+    int64_t ID() const {return this->model_id_;}
+
 public:
     geometry::FVector3D m_scale = geometry::FVector3D(1, 1, 1);
     geometry::FVector3D m_oldScale = geometry::FVector3D(1, 1, 1);
@@ -96,14 +115,10 @@ public:
     // 模型z轴距离平台的距离
     float m_zDistanceFromPlatform = 0.0f;
 
-public:
-    void ProceseModelAfterLoad();
-    static std::shared_ptr<RenderModel> LoadStlFile(const char* filePath, bool is_need_place_on_platform_flag);
-    void Triangle(geometry::FVector3D &v1, geometry::FVector3D &v2, geometry::FVector3D &v3);
+private:
+    int64_t model_id_ = 0;
 
-    void GatherMatrix4x4(geometry::DMatrix4x4 &mat);
-    void ApplyMat(geometry::FMatrix4x4& mat);
-    void PlaceModelCenterToCenter(bool keepPosition = false);
 };
+}
 
 #endif // RENDERMODEL_H

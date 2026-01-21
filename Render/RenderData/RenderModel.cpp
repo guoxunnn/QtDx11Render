@@ -1,42 +1,12 @@
 
 #include "RenderModel.h"
 #include <fstream>
+namespace render {
 
-std::shared_ptr<RenderModel> RenderModel::LoadStlFile(const char* filePath, bool is_need_place_on_platform_flag) {
-    // LOGI << "start load file:" << filePath;
-    std::shared_ptr<RenderModel> p_model = std::make_shared<RenderModel>();
-    std::ifstream fin(filePath, std::ifstream::in | std::ifstream::binary);
+std::atomic<int> g_unique_id = 0;
 
-    int triangleCount = 0;
+RenderModel::RenderModel() : model_id_(g_unique_id.fetch_add(1)){
 
-    if (fin.bad()) return false;
-    fin.seekg(80, std::ios::beg);
-    int faceCount = 0;
-    fin.read((char*)&faceCount, 4);
-    int currentPos = fin.tellg();
-    if (fin.gcount() <= 0) return false;
-
-    fin.seekg(0, fin.end);
-    int fileSize = fin.tellg();
-    fin.seekg(currentPos, fin.beg);
-
-    float v[13];
-    int faceByteSize = 12 * 4 + 2;
-
-    for (int i = 0; i < faceCount; i++) {
-        fin.read((char*)(v), faceByteSize);
-        geometry::FVector3D point1(v[3], v[4], v[5]), point2(v[6], v[7], v[8]), point3(v[9], v[10], v[11]);
-        p_model->Triangle(point1, point2, point3);
-        triangleCount++;
-        // if (i <= 20) {
-        //     LOGI << " " << point1.x() << " " << point1.y() << " " << point1.z() << " ";
-        //     LOGI << " " << point2.x() << " " << point2.y() << " " << point2.z();
-        //     LOGI << " " << point3.x() << " " << point3.y() << " " << point3.z();
-        // }
-    }
-    if(is_need_place_on_platform_flag)
-        p_model->ProceseModelAfterLoad();
-    return p_model;
 }
 
 void RenderModel::ProceseModelAfterLoad() {
@@ -90,5 +60,6 @@ void RenderModel::PlaceModelCenterToCenter(bool keepPosition) {
     if (keepPosition) m_translate += m_modelCenterPos;
     m_modelMinPos = -m_modelSize / 2;
     m_modelMaxPos = m_modelSize / 2;
+}
 }
 

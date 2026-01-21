@@ -7,5 +7,9 @@ RenderContext::RenderContext(RenderApiImpl* impl, std::shared_ptr<RenderEngineIn
 void RenderContext::UpdateCamera(const RCamera& c) {
     this->render_camera_ = c;
 }
+
+void RenderContext::UpdateGpuBuffer() {
+    GetModelRenderManager()->BuildModelGpuBuffer(shared_from_this());
+}
 }
 

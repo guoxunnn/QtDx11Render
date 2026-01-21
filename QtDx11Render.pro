@@ -44,3 +44,6 @@ HEADERS += \
     src/render/render_manager.h \
     src/render/render_window_view.h \
     src/soft_ware_control.h
+
+QMAKE_PRE_LINK += xcopy /y /D /S $$system_path($$PWD/Resources) $$system_path($$OUT_PWD/Resources/) &
+QMAKE_PRE_LINK += xcopy /y /D /S $$system_path($$PWD/Bin) $$system_path($$OUT_PWD/$${TARGET_TYPE}) &
