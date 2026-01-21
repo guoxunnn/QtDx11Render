@@ -5,7 +5,9 @@ INCLUDEPATH += $$PWD
 HEADERS += \
     $$PWD/Base/MainAreaRender.h \
     $$PWD/Base/RenderAreaBase.h \
+    $$PWD/Base/RenderBase.h \
     $$PWD/Base/RenderEngineInterface.h \
+    $$PWD/Core/Buffer/ModelBuffer.h \
     $$PWD/Core/Manager/ModelRenderManager.h \
     $$PWD/Core/Manager/RenderManager.h \
     $$PWD/Core/Manager/RenderMouseAndKeyEventControl.h \
@@ -22,7 +24,9 @@ HEADERS += \
 SOURCES += \
     $$PWD/Base/MainAreaRender.cpp \
     $$PWD/Base/RenderAreaBase.cpp \
+    $$PWD/Base/RenderBase.cpp \
     $$PWD/Base/RenderEngineInterface.cpp \
+    $$PWD/Core/Buffer/ModelBuffer.cpp \
     $$PWD/Core/Manager/ModelRenderManager.cpp \
     $$PWD/Core/Manager/RenderManager.cpp \
     $$PWD/Core/Manager/RenderMouseAndKeyEventControl.cpp \

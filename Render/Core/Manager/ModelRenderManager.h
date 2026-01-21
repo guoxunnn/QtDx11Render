@@ -6,16 +6,12 @@
 #include "../../RenderData/RenderData.h"
 #include "geometry/DMatrix4x4.h"
 #include "../../RenderData/RenderModel.h"
+#include "../Buffer/ModelBuffer.h"
 
 namespace render {
 class RenderContext;
 
-class ModelBuffer {
-public:
-    int64_t model_id_ = -1;
-    geometry::DMatrix4x4 model_matrix_;
-    std::vector<std::shared_ptr<BlockBuffer>> block_buffers_;
-};
+
 
 class ModelRenderManager {
 public:

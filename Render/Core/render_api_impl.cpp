@@ -55,7 +55,7 @@ void RenderApiImpl::Render(int win_id) {
 }
 
 render::RenderInterface* RenderApiImpl::GetRenderEngine(int win_id) {
-    return &getRenderManager(win_id)->GetRenderContext()->GetRenderEngine()->render_interface_;
+    return &getRenderManager(win_id)->GetRenderContext()->GetRenderEngineInterface()->render_interface_;
 }
 
 render::RenderItemInfo* RenderApiImpl::CreateRenderInfo(int win_id, int base_id, RenderTargetType type) {

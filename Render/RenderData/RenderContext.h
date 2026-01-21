@@ -11,7 +11,7 @@ public:
     RenderContext(RenderApiImpl* impl, std::shared_ptr<RenderEngineInterface> engine);
     void UpdateCamera(const RCamera& c);
     void UpdateGpuBuffer();
-    RenderEngineInterface* GetRenderEngine() { return engine_.get(); }
+    std::shared_ptr<RenderEngineInterface> GetRenderEngineInterface() { return engine_; }
     ModelRenderManager* GetModelRenderManager(){return impl_->GetModelRenderManager();}
 
 private:

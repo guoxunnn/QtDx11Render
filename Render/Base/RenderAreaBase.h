@@ -3,15 +3,19 @@
 #define RENDERAREABASE_H
 #include "Impl/render_data.h"
 #include <memory>
+#include "RenderData/RenderContext.h"
 
 namespace render {
 class RenderManager;
+class RenderContext;
 
 class RenderAreaBase {
 public:
     RenderAreaBase(RenderManager* manager);
     RenderItemInfo* GetRenderItemInfo() {return render_item_info_.get();}
     virtual void Render() = 0;
+    std::shared_ptr<RenderContext> GetRenderContext();
+    const RenderItemInfo& AreaInfo() const {return *render_item_info_.get();}
 
 protected:
     std::shared_ptr<RenderItemInfo> render_item_info_ = nullptr;

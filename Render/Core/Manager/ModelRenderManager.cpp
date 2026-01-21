@@ -29,7 +29,7 @@ std::shared_ptr<ModelBuffer> ModelRenderManager::CreateModelBufferFromRenderMode
     const auto& vertices = p_model->vertexElement.vertices;
     const auto& indices = p_model->vertexElement.indices;
     auto buffer = std::make_shared<BlockBuffer>(cur_id, nullptr);
-    auto engine_interface = context->GetRenderEngine();
+    auto engine_interface = context->GetRenderEngineInterface();
     int vertexBufferSize = vertices.size() * sizeof(geometry::FVector3D) / sizeof(float);
     engine_interface->CreateGpuVertexBuffer((float*)vertices.data(), vertexBufferSize, buffer->vertex_handle_);
     engine_interface->CreateGpuIndexBuffer((uint32_t*)indices.data(), indices.size(), buffer->index_handle_);
