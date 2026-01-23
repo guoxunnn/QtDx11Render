@@ -75,6 +75,39 @@ namespace render {
         int mip_level_ = 1;
     };
 
+
+    class RenderMaterialConfig {
+    public:
+        RenderMaterialConfig() {}
+        RenderMaterialConfig& operator=(const RenderColor& color) {
+            ambient_ = color;
+            diffuse_ = color;
+            specular_ = color;
+            return *this;
+        }
+        bool IsValid() const {
+            return !(ambient_.Rgba() == 0 ||
+                     diffuse_.Rgba() == 0 ||
+                     specular_.Rgba() == 0 ||
+                     shininess_ <= 0.f);
+        }
+    public:
+         RenderColor ambient_ =  RenderColor::FromColor32(0, 0, 0, 0); // 环境光
+         RenderColor diffuse_ =  RenderColor::FromColor32(0, 0, 0, 0); // 漫反射
+         RenderColor specular_ =  RenderColor::FromColor32(0, 0, 0, 0); // 镜面反射
+        float shininess_ = 1.f; // 反射系数；越靠近0越亮，但是不能等于0 值越大反射系数越低
+        float fill[3] = { 0.f }; // 填充；很多渲染结构都需要4x4字节对齐
+    };
+
+    class RenderLightConfig {
+    public:
+        RenderColor ambient_ = RenderColor::FromColor32(78, 174, 174);
+        RenderColor diffuse_ = RenderColor::FromColor32(78, 174, 174);
+        RenderColor specular_ = RenderColor::FromColor32(200, 200, 200);
+        float       pos_[4] = {0, 0, 1000, 0};
+    };
+
+
     class RenderUavBase {
     public:
         virtual ~RenderUavBase() = default;

@@ -3,9 +3,7 @@
 
 namespace render {
 void MainAreaRender::Render() {
-    int a = 10;
-    a++;
-    a = a + 102;
+    GetRenderContext()->GetRenderEngineInterface()->ClearCurColor(RenderColor::FromColor32(90, 90, 90));
 }
 }
 

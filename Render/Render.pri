@@ -11,6 +11,7 @@ HEADERS += \
     $$PWD/Core/Manager/ModelRenderManager.h \
     $$PWD/Core/Manager/RenderManager.h \
     $$PWD/Core/Manager/RenderMouseAndKeyEventControl.h \
+    $$PWD/Core/Render/ModelRender.h \
     $$PWD/Core/render_api_impl.h \
     $$PWD/Impl/render_api.h \
     $$PWD/Impl/render_color_config.h \
@@ -30,6 +31,7 @@ SOURCES += \
     $$PWD/Core/Manager/ModelRenderManager.cpp \
     $$PWD/Core/Manager/RenderManager.cpp \
     $$PWD/Core/Manager/RenderMouseAndKeyEventControl.cpp \
+    $$PWD/Core/Render/ModelRender.cpp \
     $$PWD/Core/render_api_impl.cpp \
     $$PWD/Impl/render_api.cpp \
     $$PWD/Impl/render_color_config.cpp \

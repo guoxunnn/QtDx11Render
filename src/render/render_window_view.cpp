@@ -13,6 +13,18 @@ void RenderWindowView::render() {
     auto render_manager = SoftwareControlSingleton::Instance().GetRenderManager();
     std::unique_lock<std::mutex> auto_lock(render_manager->render_mutex_);
     belong_window_->beginExternalCommands();
+    {
+        QSGRendererInterface* rendererInterface = belong_window_->rendererInterface();
+        render::RenderInterface* render_interface = render_manager->GetRenderApi()->GetRenderEngine(belong_window_->winId());
+#if defined(_WIN32) || defined(_WIN32_) || defined(WIN32) || defined(_WIN64_) || defined(WIN64) || defined(_WIN64)
+        {
+            render_interface->drv = reinterpret_cast<ID3D11Device*>(
+                rendererInterface->getResource(belong_window_, QSGRendererInterface::DeviceResource));
+            render_interface->drv_context = reinterpret_cast<ID3D11DeviceContext*>(
+                rendererInterface->getResource(belong_window_, QSGRendererInterface::DeviceContextResource));
+        }
+#endif
+    }
     render_manager->GetRenderApi()->Render(belong_window_->winId());
     belong_window_->endExternalCommands();
 }

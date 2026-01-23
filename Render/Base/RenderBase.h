@@ -7,6 +7,7 @@
 #include <string>
 #include <memory>
 #include "Core/Buffer/ModelBuffer.h"
+#include "../RenderData/RenderData.h"
 #include "Base/RenderEngineInterface.h"
 
 namespace  render {
@@ -75,7 +76,7 @@ public:
 
 protected:
     virtual void updataConstVar();
-    virtual bool init() = 0;
+    virtual bool init();
     virtual void release();
     void renderInit();
     std::shared_ptr<RenderEngineInterface> getRenderEngineInterface() const;

@@ -10,6 +10,12 @@ RenderBase::RenderBase(RenderAreaBase* engine) {
 void RenderBase::updataConstVar(){
     getRenderEngineInterface()->UpdataConstBufferCB(mat_cb_.getBuffer());
 }
+
+bool RenderBase::init(){
+    mat_cb_.setBuffer(getRenderEngineInterface()->CreateConstBuffer(0, mat_cb_.data_size_, "MatCB"));
+    return true;
+}
+
 void RenderBase::release(){
     status_info_.cull_back = false;
     status_info_.transparent_blend = false;
