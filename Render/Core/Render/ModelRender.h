@@ -8,6 +8,15 @@
 namespace render {
 namespace ModelRenderCB {
 struct ColorCB {
+    ColorCB() {
+        mat = RenderColor::FromColor32(12, 136, 224);
+        light.ambient_ = RenderColor::FromColor32(50, 50, 50);
+        light.diffuse_ = RenderColor::FromColor32(150, 150, 150);
+        light.specular_ = RenderColor::FromColor32(90, 90, 90);
+        light.pos_[0] = 320;
+        light.pos_[1] = 320;
+        light.pos_[3] = 1000;
+    }
     RenderMaterialConfig mat;
     RenderLightConfig light;
 };

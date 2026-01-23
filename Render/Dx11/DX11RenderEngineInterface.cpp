@@ -636,7 +636,7 @@ std::shared_ptr<DX11RenderProgramBase> DX11RenderEngineInterface::createRenderSh
 std::shared_ptr<RenderProgramBase> DX11RenderEngineInterface::CreateShaderProgram(
     const RenderProgramBase::ShaderInfo& info) const {
 
-    std::string dir = "resources/shader/DX11Shader2/" + info.pragma_name_ + "/";
+    std::string dir = "resources/Shader/Dx11/" + info.pragma_name_ + "/";
     std::string cso_dir = "";
     auto w_dir = D3DUtil::GetWC(dir.c_str(), dir.size());
     std::wstring cso_w_dir;
