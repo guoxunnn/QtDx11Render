@@ -10,6 +10,7 @@ class RenderContext : public std::enable_shared_from_this<RenderContext> {
 public:
     RenderContext(RenderApiImpl* impl, std::shared_ptr<RenderEngineInterface> engine);
     void UpdateCamera(const RCamera& c);
+    const RCamera& GetCamera() const { return this->render_camera_; }
     void UpdateGpuBuffer();
     std::shared_ptr<RenderEngineInterface> GetRenderEngineInterface() { return engine_; }
     ModelRenderManager* GetModelRenderManager(){return impl_->GetModelRenderManager();}

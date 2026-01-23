@@ -19,7 +19,12 @@ struct ParameterCB {
 class ModelRender : public RenderBase {
 public:
     ModelRender(RenderAreaBase* engine);
+    void Render();
+
+protected:
     bool init() override;
+    void bind(std::shared_ptr<ModelBuffer> model_buf);
+    void updataConstVar();
 
 private:
     RenderConstObject<ModelRenderCB::ColorCB> color_cb_;

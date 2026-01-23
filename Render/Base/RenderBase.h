@@ -9,6 +9,7 @@
 #include "Core/Buffer/ModelBuffer.h"
 #include "../RenderData/RenderData.h"
 #include "Base/RenderEngineInterface.h"
+#include "../RenderData/RenderContext.h"
 
 namespace  render {
 class RenderAreaBase;
