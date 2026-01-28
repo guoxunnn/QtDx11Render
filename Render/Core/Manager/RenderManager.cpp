@@ -18,6 +18,7 @@ RenderManager::RenderManager(RenderApiImpl* impl) {
 }
 
 void RenderManager::Render() {
+    render_context_base_->GetRenderEngineInterface()->init();
     render_context_base_->UpdateCamera(mouse_control_.GetCamera());
     render_context_base_->UpdateGpuBuffer();
     std::vector<RenderVecStruct> render_vec;

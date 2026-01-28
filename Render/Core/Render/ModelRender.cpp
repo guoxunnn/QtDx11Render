@@ -34,6 +34,13 @@ void ModelRender::bind(std::shared_ptr<ModelBuffer> model_buf) {
     auto final_mat = r_c.GetProjectMatrix() * r_c.GetViewMatrix() * model_buf->model_matrix_;
     mat_cb_.data.finallyMatrix = final_mat;
     updataConstVar();
+    setStatusInfo();
+}
+
+void ModelRender::setStatusInfo() {
+    getRenderEngineInterface()->UseShaderProgramCB(shader_program_);
+    getRenderEngineInterface()->SetRenderStatusCB(status_info_);
+
 }
 
 void ModelRender::updataConstVar() {

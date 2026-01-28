@@ -6,7 +6,8 @@
 namespace render {
 
 ModelRenderManager::ModelRenderManager() {
-    LoadStlFile("./Resources/TestStl/Chicken.stl", true);
+    auto m = LoadStlFile("./Resources/TestStl/Chicken.stl", true);
+    test_render_model_vec.push_back(m);
 }
 
 void ModelRenderManager::BuildModelGpuBuffer(std::shared_ptr<RenderContext> context) {
@@ -23,9 +24,10 @@ std::shared_ptr<ModelBuffer> ModelRenderManager::CreateModelBufferFromRenderMode
         res_model = std::make_shared<ModelBuffer>();
     }
     auto cur_id = p_model->ID();
-    if(p_model->vertexElement.IsModify()) {
+    if(!p_model->vertexElement.IsModify()) {
         return res_model;
     }
+    p_model->vertexElement.SetModifyFlagFalse();
     const auto& vertices = p_model->vertexElement.vertices;
     const auto& indices = p_model->vertexElement.indices;
     auto buffer = std::make_shared<BlockBuffer>(cur_id, nullptr);

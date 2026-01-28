@@ -34,6 +34,7 @@ protected:
     bool init() override;
     void bind(std::shared_ptr<ModelBuffer> model_buf);
     void updataConstVar();
+    void setStatusInfo();
 
 private:
     RenderConstObject<ModelRenderCB::ColorCB> color_cb_;

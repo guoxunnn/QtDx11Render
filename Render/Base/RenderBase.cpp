@@ -5,6 +5,7 @@
 namespace render {
 RenderBase::RenderBase(RenderAreaBase* engine) {
     render_engine_ = engine;
+    render_context_ = engine->GetRenderContext().get();
 }
 
 void RenderBase::updataConstVar(){
@@ -97,9 +98,19 @@ void RenderBase::endMultTextureRender(){
     offscreen_texture_->setBindSlotsVec({});
 }
 
-void RenderBase::renderModelBuffer(ModelBuffer* model_buf, RenderEngineInterface::DrawType type){}
-void RenderBase::renderBlockBuffer(BlockBuffer* buf, RenderEngineInterface::DrawType type){}
-void RenderBase::renderBlockBuffer(VertexBlockBuffer* buf, RenderEngineInterface::DrawType type){}
+void RenderBase::renderModelBuffer(ModelBuffer* model_buf, RenderEngineInterface::DrawType type){
+    for (auto& buf : model_buf->block_buffers_) {
+        renderBlockBuffer(buf.get(), type);
+    }
+}
+
+void RenderBase::renderBlockBuffer(BlockBuffer* buf, RenderEngineInterface::DrawType type){
+    getRenderEngineInterface()->RenderBlockBufferCB(buf, type);
+}
+
+void RenderBase::renderBlockBuffer(VertexBlockBuffer* buf, RenderEngineInterface::DrawType type){
+    getRenderEngineInterface()->RenderBlockBufferCB(buf, type);
+}
 
 bool RenderBase::beginOffScreenRender(const RenderColor& clear_color, int width, int height){
     if (!offscreen_texture_) {
