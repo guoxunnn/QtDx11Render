@@ -539,6 +539,9 @@ bool DX11RenderEngineInterface::UpdataConstBuffer(const std::shared_ptr<RenderCo
     DX11RenderConstBuffer* ptr = (DX11RenderConstBuffer*)buffer.get();
     D3D11_MAPPED_SUBRESOURCE mappedData;
     ID3D11DeviceContext* context = (ID3D11DeviceContext*)render_interface_.drv_context;
+    if (!ptr->buffer_ptr_) {
+        return false;
+    }
     context->Map(ptr->buffer_ptr_.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedData);
     memcpy_s(mappedData.pData, ptr->data_size_, ptr->data_ptr, ptr->data_size_);
     context->Unmap(ptr->buffer_ptr_.Get(), 0);

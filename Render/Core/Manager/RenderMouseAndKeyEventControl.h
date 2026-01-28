@@ -8,6 +8,7 @@ class RenderMouseAndKeyEventControl {
 public:
     RenderMouseAndKeyEventControl();
     void OnMousePressEvent(const MouseEvent& event);
+    void OnWheelEvent(const WheelEvent& event);
     void OnMouseMoveEvent(const MouseEvent& event);
     void OnMouseReleaseEvent(const MouseEvent& event);
     void onMouseClickEvent(const MouseEvent& event);

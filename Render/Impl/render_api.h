@@ -17,6 +17,7 @@ public:
     virtual void OnHoverLeaveEvent(const MouseEvent& event) = 0;
     virtual void OnHoverMoveEvent(const MouseEvent& event) = 0;
     virtual void OnUpdataMousePos(const MouseEvent& event) = 0;
+    virtual void OnWheelEvent(const WheelEvent& event) = 0;
     virtual void Render(int win_id) = 0;
     virtual render::RenderInterface* GetRenderEngine(int win_id) = 0;
     virtual RenderConfig* GetRenderConfig() const = 0;

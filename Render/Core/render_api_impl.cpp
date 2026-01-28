@@ -46,6 +46,10 @@ void RenderApiImpl::OnUpdataMousePos(const MouseEvent& event){
     getRenderManager(event.win_id_)->GetMouseControl()->OnUpdataMousePos(event);
 }
 
+void RenderApiImpl::OnWheelEvent(const WheelEvent& event) {
+    getRenderManager(event.win_id_)->GetMouseControl()->OnWheelEvent(event);
+}
+
 RenderConfig* RenderApiImpl::GetRenderConfig() const {
     return this->render_config_.get();
 }

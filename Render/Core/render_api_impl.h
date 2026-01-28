@@ -20,6 +20,7 @@ public:
     void OnHoverLeaveEvent(const MouseEvent& event) override;
     void OnHoverMoveEvent(const MouseEvent& event) override;
     void OnUpdataMousePos(const MouseEvent& event) override;
+    void OnWheelEvent(const WheelEvent& event) override;
     RenderConfig* GetRenderConfig() const override;
     void Render(int win_id) override;
     render::RenderInterface* GetRenderEngine(int win_id);

@@ -40,11 +40,13 @@ void ModelRender::bind(std::shared_ptr<ModelBuffer> model_buf) {
 void ModelRender::setStatusInfo() {
     getRenderEngineInterface()->UseShaderProgramCB(shader_program_);
     getRenderEngineInterface()->SetRenderStatusCB(status_info_);
-
 }
 
 void ModelRender::updataConstVar() {
     RenderBase::updataConstVar();
+    getRenderEngineInterface()->UpdataConstBufferCB(param_cb_.getBuffer());
+    getRenderEngineInterface()->UpdataConstBufferCB(color_cb_.getBuffer());
+
 }
 
 }

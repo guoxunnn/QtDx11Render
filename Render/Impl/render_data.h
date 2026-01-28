@@ -65,7 +65,7 @@ namespace render {
         bool isAltPressed() const {
             return modifiers_ & AltModifier;
         }
-        int buttons;
+        int buttons = 0;
         uint32_t modifiers_;
         Point position;
         Point start_pos_;
@@ -74,5 +74,15 @@ namespace render {
         int win_id_ = -1;
         float device_pixel_ratio_ = 1.0f;
         RenderTargetType render_target_type_ = RenderTargetType::MainRenderArea;
+    };
+    struct WheelEvent {
+        float det;
+        float angleDelta;
+        Point position;
+        uint32_t modifiers_;
+        int win_id_ = 0;
+        WheelEvent() {
+            det = 0.001;
+        }
     };
 }

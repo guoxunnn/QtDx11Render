@@ -97,22 +97,41 @@ render::MouseEvent RenderItemBase::getRenderMouseEvent(QMouseEvent* event, bool 
 }
 
 RenderAreaItem::RenderAreaItem() {
+    setAcceptedMouseButtons(Qt::AllButtons);  // 接收鼠标事件
+    setAcceptHoverEvents(true);                // 接收悬停事件
+    setAcceptTouchEvents(true); // 有时需要这个来接收滚轮事件
 }
 
 void RenderAreaItem::mousePressEvent(QMouseEvent* event) {
     auto render_api = SoftwareControlSingleton::Instance().GetRenderManager()->GetRenderApi();
     auto render_mouse_event = getRenderMouseEvent(event);
     render_api->OnMousePressEvent(render_mouse_event);
+    this->window()->update();
 }
 
 void RenderAreaItem::mouseMoveEvent(QMouseEvent* event) {
     auto render_api = SoftwareControlSingleton::Instance().GetRenderManager()->GetRenderApi();
     auto render_mouse_event = getRenderMouseEvent(event);
     render_api->OnMouseMoveEvent(render_mouse_event);
+    this->window()->update();
 }
 
 void RenderAreaItem::mouseReleaseEvent(QMouseEvent* event) {
     auto render_api = SoftwareControlSingleton::Instance().GetRenderManager()->GetRenderApi();
     auto render_mouse_event = getRenderMouseEvent(event);
     render_api->OnMouseReleaseEvent(render_mouse_event);
+    this->window()->update();
+}
+
+void RenderAreaItem::wheelEvent(QWheelEvent* event) {
+    auto render_api = SoftwareControlSingleton::Instance().GetRenderManager()->GetRenderApi();
+    render::WheelEvent wheel_event;
+    wheel_event.det = 0.001;
+    wheel_event.angleDelta = event->angleDelta().y();
+    auto m_p = event->position().toPoint() * window()->devicePixelRatio();
+    wheel_event.position = render::Point(m_p.x(), m_p.y());
+    wheel_event.modifiers_ = event->modifiers();
+    wheel_event.win_id_ = window()->winId();
+    render_api->OnWheelEvent(wheel_event);
+    this->window()->update();
 }
