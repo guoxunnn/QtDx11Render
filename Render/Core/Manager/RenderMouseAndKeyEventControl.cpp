@@ -1,4 +1,6 @@
 #include "RenderMouseAndKeyEventControl.h"
+#include <iostream>
+
 namespace render {
 float slowly_factor = 0.15;
 
@@ -15,7 +17,7 @@ void RenderMouseAndKeyEventControl::OnWheelEvent(const WheelEvent& event) {
     bool is_slowly = event.modifiers_ & MouseEvent::ControlModifier;
     int mouse_x = event.position.x;
     int mouse_y = event.position.y;
-    int factor = 1 + event.angleDelta * event.det * 0.5;
+    float factor = 1 + event.angleDelta * event.det * 0.5;
     if (is_slowly) {
         factor = (factor - 1.0) * slowly_factor + 1.0;
     }
